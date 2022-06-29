@@ -1,11 +1,16 @@
 package com.summercamp.charger.models;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class StationType {
 
     @Id
@@ -13,12 +18,13 @@ public class StationType {
     @Column(name = "Id", nullable = false)
     private Long id;
 
-    @Column(name = "power")
-    private int power;
+    @Column(name = "Power")
+    private Float power;
 
-    @Column(name = "name")
+    @Column(name = "Name")
     private String name;
 
-    @Column(name = "plugType")
+    @Column(name = "PlugType")
     private String plugType;
+
 }

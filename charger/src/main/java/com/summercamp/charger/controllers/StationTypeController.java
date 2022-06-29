@@ -23,4 +23,9 @@ public class StationTypeController {
     public StationType saveStationType(@RequestBody StationType stationType){
         return stationTypeRepository.save(stationType);
     }
+
+    @DeleteMapping
+    public void deleteStationType(StationType stationType){
+        stationTypeRepository.delete(stationType);
+    }
 }
