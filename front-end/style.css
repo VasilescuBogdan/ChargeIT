@@ -1,0 +1,43 @@
+table{
+    border: 1px solid blue;
+    border-collapse: collapse;
+    background-color: rgba(255, 0, 0, 0.459);
+    padding: 10px;
+}
+
+.stations-table{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+body{
+    background-color: rgb(111, 223, 111);
+    font-family: sans-serif;
+}
+
+.content{
+    background-color: aliceblue;
+    margin-right: 50px;
+    margin-left: 50px;
+    padding: 5px;
+}
+
+th, td{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 50px;
+}
+
+.intro{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#title{
+    text-align: center;
+    font-size: 100px;
+}
+
+#summary{
+    text-align: justify;
+    font-size: 50px; 
+}
