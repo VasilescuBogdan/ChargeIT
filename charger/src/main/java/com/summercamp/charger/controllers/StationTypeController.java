@@ -28,4 +28,7 @@ public class StationTypeController {
     public void deleteStationType(StationType stationType){
         stationTypeRepository.delete(stationType);
     }
+
+    @GetMapping
+    public StationType getBookingAfterId(Long Id) {return stationTypeRepository.getById(Id);}
 }

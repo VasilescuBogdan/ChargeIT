@@ -18,13 +18,13 @@ public class StationType {
     @Column(name = "Id", nullable = false)
     private Long id;
 
-    @Column(name = "Power")
+    @Column(name = "Power", nullable = false)
     private Float power;
 
-    @Column(name = "Name")
+    @Column(name = "Name", nullable = false)
     private String name;
 
-    @Column(name = "PlugType")
+    @Column(name = "PlugType", nullable = false)
     private String plugType;
 
 }

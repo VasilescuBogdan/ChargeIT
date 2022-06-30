@@ -28,4 +28,7 @@ public class StationController {
     public void deleteStation(Station station){
         stationRepository.delete(station);
     }
+
+    @GetMapping
+    public Station getStationAfterId(Long Id) {return stationRepository.getById(Id);}
 }

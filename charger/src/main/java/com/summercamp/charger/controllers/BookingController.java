@@ -1,7 +1,6 @@
 package com.summercamp.charger.controllers;
 
 import com.summercamp.charger.models.Booking;
-import com.summercamp.charger.models.StationType;
 import com.summercamp.charger.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,4 +28,7 @@ public class BookingController {
     public void deleteBooking(Booking booking){
         bookingRepository.delete(booking);
     }
+
+    @GetMapping
+    public Booking getBookingAfterId(Long Id) {return bookingRepository.getById(Id);}
 }

@@ -19,16 +19,16 @@ public class Station {
     @Column(name = "Id", nullable = false)
     private Long id;
 
-    @Column(name = "StationTypeId")
+    @Column(name = "StationTypeId", nullable = false)
     private Long stationTypeId;
 
-    @Column(name = "Address")
+    @Column(name = "Address", nullable = false)
     private String address;
 
-    @Column(name = "IsOpen")
+    @Column(name = "IsOpen", nullable = false)
     private Boolean isOpen;
 
-    @Column(name = "Name")
+    @Column(name = "Name", nullable = false)
     private Boolean name;
 
 }
