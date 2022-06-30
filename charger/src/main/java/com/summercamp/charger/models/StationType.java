@@ -1,10 +1,7 @@
 package com.summercamp.charger.models;
 
 import lombok.*;
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Getter

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ChargerApplication<charger>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.summercamp.charger.ChargerApplication",
+            "projectName": "charger",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
