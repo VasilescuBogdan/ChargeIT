@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("API/stationTypes")
+@RequestMapping("/api/stationTypes")
 public class StationTypeController {
 
     @Autowired
@@ -29,6 +29,7 @@ public class StationTypeController {
         stationTypeRepository.delete(stationType);
     }
 
-    @GetMapping
-    public StationType getBookingAfterId(Long Id) {return stationTypeRepository.getById(Id);}
+    @GetMapping(value = "{id}")
+    public StationType getBookingAfterId(@PathVariable Long Id) {return stationTypeRepository.getById(Id);}
+
 }

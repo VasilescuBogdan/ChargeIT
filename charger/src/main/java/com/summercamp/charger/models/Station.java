@@ -16,9 +16,6 @@ public class Station {
     @Column(name = "Id", nullable = false)
     private Long id;
 
-    @Column(name = "StationTypeId", nullable = false)
-    private Long stationTypeId;
-
     @Column(name = "Address", nullable = false)
     private String address;
 
@@ -26,6 +23,9 @@ public class Station {
     private Boolean isOpen;
 
     @Column(name = "Name", nullable = false)
-    private Boolean name;
+    private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "station_type_id")
+    private StationType stationType;
 }

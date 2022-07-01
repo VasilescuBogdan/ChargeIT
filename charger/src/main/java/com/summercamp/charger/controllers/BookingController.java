@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("API/bookings")
+@RequestMapping("/api/bookings")
 public class BookingController {
 
     @Autowired
@@ -29,6 +29,7 @@ public class BookingController {
         bookingRepository.delete(booking);
     }
 
-    @GetMapping
-    public Booking getBookingAfterId(Long Id) {return bookingRepository.getById(Id);}
+    @GetMapping(value = "{id}")
+    public Booking getBookingAfterId(@PathVariable Long Id) {return bookingRepository.getById(Id);}
+
 }

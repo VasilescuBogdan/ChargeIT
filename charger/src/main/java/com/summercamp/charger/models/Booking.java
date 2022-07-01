@@ -28,4 +28,5 @@ public class Booking {
 
     @Column(name = "LicenceCar", nullable = false)
     private String licenceCar;
+
 }

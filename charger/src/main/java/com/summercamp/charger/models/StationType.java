@@ -16,12 +16,13 @@ public class StationType {
     private Long id;
 
     @Column(name = "Power", nullable = false)
-    private Float power;
+    private Integer power;
 
     @Column(name = "Name", nullable = false)
     private String name;
 
     @Column(name = "PlugType", nullable = false)
     private String plugType;
+
 
 }
