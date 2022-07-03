@@ -3,22 +3,17 @@ package com.summercamp.charger.models;
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Long id;
-
-    @Column(name = "StationId", nullable = false)
-    private Long stationId;
 
     @Column(name = "StartDateTime", nullable = false)
     private LocalDateTime startDateTime;
@@ -28,5 +23,9 @@ public class Booking {
 
     @Column(name = "LicenceCar", nullable = false)
     private String licenceCar;
+
+    @ManyToOne
+    @JoinColumn(name = "station_id")
+    private Station station;
 
 }

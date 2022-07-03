@@ -25,11 +25,10 @@ public class StationTypeController {
     }
 
     @DeleteMapping
-    public void deleteStationType(StationType stationType){
-        stationTypeRepository.delete(stationType);
-    }
+    public void deleteStationType(@RequestBody StationType stationType){stationTypeRepository.delete(stationType);}
 
-    @GetMapping(value = "{id}")
-    public StationType getBookingAfterId(@PathVariable Long Id) {return stationTypeRepository.getById(Id);}
+    @GetMapping(value = "/{id}")
+    public StationType getBookingAfterId(@PathVariable("id") Long Id) {return stationTypeRepository.findById(Id).get();}
+
 
 }

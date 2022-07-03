@@ -6,7 +6,6 @@ import com.summercamp.charger.models.StationType;
 import com.summercamp.charger.repositories.StationRepository;
 import com.summercamp.charger.repositories.StationTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class StationController {
 
 
         StationType stationType = stationTypeRepository.findById(stationDto.getStationTypeId())
-                .orElseThrow(() -> new RuntimeException("Error while retreiving stationDpo type "));
+                .orElseThrow(() -> new RuntimeException("Error while retrieving stationDpo type "));
 
         Station station = new Station();
         station.setStationType(stationType);
@@ -43,10 +42,8 @@ public class StationController {
     }
 
     @DeleteMapping
-    public void deleteStation(Station station){
-        stationRepository.delete(station);
-    }
+    public void deleteStation(@RequestBody Station station){stationRepository.delete(station);}
 
-    @GetMapping(value = "{id}")
-    public Station getStationAfterId(@PathVariable Long Id) {return stationRepository.getById(Id);}
+    @GetMapping(value = "/{id}")
+    public Station getStationAfterId(@PathVariable("id") Long Id) {return stationRepository.findById(Id).get();}
 }

@@ -1,6 +1,5 @@
 package com.summercamp.charger.dtos;
 
-import com.summercamp.charger.models.StationType;
 import lombok.Data;
 
 @Data
