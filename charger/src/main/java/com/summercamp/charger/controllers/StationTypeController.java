@@ -30,5 +30,7 @@ public class StationTypeController {
     @GetMapping(value = "/{id}")
     public StationType getBookingAfterId(@PathVariable("id") Long Id) {return stationTypeRepository.findById(Id).get();}
 
+    @PutMapping
+    public StationType updateStationType(@RequestBody StationType stationType) {return stationTypeRepository.save(stationType);}
 
 }
