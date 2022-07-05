@@ -54,4 +54,6 @@ public class StationController {
 
     @GetMapping(value = "/{id}")
     public Station getStationAfterId(@PathVariable("id") Long Id) {return stationRepository.findById(Id).get();}
+
+
 }

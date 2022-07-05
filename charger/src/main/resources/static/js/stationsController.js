@@ -29,7 +29,7 @@ $(document).ready(async function() {
             const newStationTr = document.createElement("tr");
             createElementFromAttribute(station.id, newStationTr);
             createElementFromAttribute(station.name, newStationTr);
-            //createElementFromAttribute(station.location.address, newStationTr);
+            createElementFromAttribute(station.location.address, newStationTr);
             createElementFromAttribute(station.isOpen, newStationTr);
             createElementFromAttribute(station.stationType.name, newStationTr);
             createElementFromAttribute(station.stationType.plugType, newStationTr);

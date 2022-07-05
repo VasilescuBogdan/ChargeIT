@@ -25,7 +25,7 @@ public class Booking {
     private String licenceCar;
 
     @ManyToOne
-    @JoinColumn(name = "station_id")
+    @JoinColumn(name = "station_id", nullable = false)
     private Station station;
 
 }

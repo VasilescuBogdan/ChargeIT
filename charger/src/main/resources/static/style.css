@@ -28,6 +28,10 @@ th, td{
     margin-right: 50px;
 }
 
+.nav-link{
+    color: white 
+}
+
 .intro{
     margin-left: 20px;
     margin-right: 20px;

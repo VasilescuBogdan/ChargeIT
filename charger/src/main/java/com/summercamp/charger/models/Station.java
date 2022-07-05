@@ -19,10 +19,10 @@ public class Station {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "station_type_id")
+    @JoinColumn(name = "station_type_id", nullable = false)
     private StationType stationType;
 
     @OneToOne
-    @JoinColumn(name = "location_id")
+    @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 }
