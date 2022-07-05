@@ -14,4 +14,6 @@ public class StationDto {
     private String name;
 
     private Long stationTypeId;
+
+    private Long locationId;
 }

@@ -1,8 +1,10 @@
 package com.summercamp.charger.controllers;
 
 import com.summercamp.charger.dtos.StationDto;
+import com.summercamp.charger.models.Location;
 import com.summercamp.charger.models.Station;
 import com.summercamp.charger.models.StationType;
+import com.summercamp.charger.repositories.LocationRepository;
 import com.summercamp.charger.repositories.StationRepository;
 import com.summercamp.charger.repositories.StationTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class StationController {
     @Autowired
     private StationTypeRepository stationTypeRepository;
 
+    @Autowired
+    private LocationRepository locationRepository;
+
     @GetMapping
     public List<Station> getStations() {
         return stationRepository.findAll();
@@ -30,12 +35,15 @@ public class StationController {
 
 
         StationType stationType = stationTypeRepository.findById(stationDto.getStationTypeId())
-                .orElseThrow(() -> new RuntimeException("Error while retrieving stationDpo type "));
+            .orElseThrow(() -> new RuntimeException("Error while retrieving stationDto type "));
+
+        Location location = locationRepository.findById(stationDto.getLocationId())
+            .orElseThrow(() -> new RuntimeException("Error while retrieving stationDto type "));
 
         Station station = new Station();
         station.setStationType(stationType);
+        station.setLocation(location);
         station.setName(stationDto.getName());
-        station.setAddress(stationDto.getAddress());
         station.setIsOpen(stationDto.getIsOpen());
 
         return stationRepository.save(station);
