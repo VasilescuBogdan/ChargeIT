@@ -4,10 +4,18 @@ function createElementFromAttribute(attribute, parent) {
     parent.appendChild(openCell);
 }
 
-function createButtons(parent) {
+function createButtons(parent, data) {
     const buttonsTd = document.createElement("td");
-    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book now!</button>`;
+    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog(${data.id}) data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book now!</button>`;
     parent.appendChild(buttonsTd);
+}
+
+function showDialog(id){
+    console.log(id);
+    $("#inputId").val(id);
+    var myModalEl = document.getElementById('staticBackdrop');
+    var modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+    modal.show();
 }
 
 const baseURL = 'http://localhost:8090';
@@ -33,10 +41,11 @@ $(document).ready(async function() {
             createElementFromAttribute(station.isOpen, newStationTr);
             createElementFromAttribute(station.stationType.name, newStationTr);
             createElementFromAttribute(station.stationType.plugType, newStationTr);
-            createButtons(newStationTr);
+            createButtons(newStationTr, station);
             table.append(newStationTr);
         }
     } else {
         console.log("Errror ");
     }
 })
+

@@ -10,4 +10,6 @@ public class ChargerApplication {
 		SpringApplication.run(ChargerApplication.class, args);
 	}
 
+	
+
 }

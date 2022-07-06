@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
+//@CrossOrigin("http://localhost:5500")
 @RestController
 @RequestMapping("/api/locations")
 public class LocationController {
