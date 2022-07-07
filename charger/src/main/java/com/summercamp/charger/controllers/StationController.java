@@ -19,17 +19,17 @@ public class StationController {
 
     @GetMapping
     public List<Station> getStations() {
-        return getStations();
+        return stationService.getStations();
     }
 
     @GetMapping(value = "/{attribute}")
     public List<Station> getStationsSorted(@PathVariable("attribute") String attribute) {
-        return getStationsSorted(attribute);
+        return stationService.getStationsSorted(attribute);
     } 
 
     @PostMapping
     public Station saveStation(@RequestBody StationDto stationDto){
-        return saveStation(stationDto);
+        return stationService.saveStation(stationDto);
     }
 
     @DeleteMapping(value = "/{id}")
