@@ -1,12 +1,9 @@
 package com.summercamp.charger.controllers;
 
 import com.summercamp.charger.dtos.StationDto;
-import com.summercamp.charger.models.Location;
 import com.summercamp.charger.models.Station;
-import com.summercamp.charger.models.StationType;
-import com.summercamp.charger.repositories.LocationRepository;
-import com.summercamp.charger.repositories.StationRepository;
-import com.summercamp.charger.repositories.StationTypeRepository;
+import com.summercamp.charger.services.StationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,43 +15,38 @@ import java.util.List;
 public class StationController {
 
     @Autowired
-    private StationRepository stationRepository;
-
-    @Autowired
-    private StationTypeRepository stationTypeRepository;
-
-    @Autowired
-    private LocationRepository locationRepository;
+    StationService stationService;
 
     @GetMapping
     public List<Station> getStations() {
-        return stationRepository.findAll();
+        return getStations();
     }
+
+    @GetMapping(value = "/{attribute}")
+    public List<Station> getStationsSorted(@PathVariable("attribute") String attribute) {
+        return getStationsSorted(attribute);
+    } 
 
     @PostMapping
     public Station saveStation(@RequestBody StationDto stationDto){
-
-
-        StationType stationType = stationTypeRepository.findById(stationDto.getStationTypeId())
-            .orElseThrow(() -> new RuntimeException("Error while retrieving stationDto type "));
-
-        Location location = locationRepository.findById(stationDto.getLocationId())
-            .orElseThrow(() -> new RuntimeException("Error while retrieving stationDto type "));
-
-        Station station = new Station();
-        station.setStationType(stationType);
-        station.setLocation(location);
-        station.setName(stationDto.getName());
-        station.setIsOpen(stationDto.getIsOpen());
-
-        return stationRepository.save(station);
+        return saveStation(stationDto);
     }
 
-    @DeleteMapping
-    public void deleteStation(@RequestBody Station station){stationRepository.delete(station);}
+    @DeleteMapping(value = "/{id}")
+    public void deleteStation(@PathVariable("id") Long Id){
+        stationService.deleteStation(Id);
+    }
 
-    @GetMapping(value = "/{id}")
-    public Station getStationAfterId(@PathVariable("id") Long Id) {return stationRepository.findById(Id).get();}
+    @PatchMapping(value = "/{id}")
+    public void updateStation(@PathVariable("id") Long Id, @RequestBody Station station){
+        stationService.updateStation(Id, station);
+    }
 
+    /* 
+    @GetMapping(value = "/{name}")
+    public List<Station> getStationAfterName(@PathVariable("name") String name){
+        return stationService.getStationAfterName(name);
+    }
+    */
 
 }

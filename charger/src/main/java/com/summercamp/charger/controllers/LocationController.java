@@ -3,7 +3,7 @@ package com.summercamp.charger.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.summercamp.charger.models.Location;
-import com.summercamp.charger.repositories.LocationRepository;
+import com.summercamp.charger.services.LocationService;
 
 import java.util.List;
 
@@ -16,25 +16,26 @@ import org.springframework.web.bind.annotation.*;
 public class LocationController {
     
     @Autowired
-    private LocationRepository locationRepository;
+    LocationService locationService;
 
     @GetMapping
     public List<Location> getStationTypes(){
-        return locationRepository.findAll();
+        return locationService.getStationTypes();
     }
 
     @PostMapping
     public Location saveStationType(@RequestBody Location location){
-        return locationRepository.save(location);
+        return locationService.saveStationType(location);
+    }
+    
+    @DeleteMapping(value = "/{id}")
+    public void deleteLocation(@PathVariable("id") Long Id){
+        locationService.deleteLocation(Id);
     }
 
-    @DeleteMapping
-    public void deleteStationType(@RequestBody Location location){locationRepository.delete(location);}
-
-    @GetMapping(value = "/{id}")
-    public Location getBookingAfterId(@PathVariable("id") Long Id) {return locationRepository.findById(Id).get();}
-
-    @PutMapping
-    public Location updateStationType(@RequestBody Location location) {return locationRepository.save(location);}
+    @PatchMapping(value = "/{id}")
+    public void updateLocation(@PathVariable("id") Long Id, @RequestBody Location location){
+        locationService.updateLocation(Id, location);
+    }
 
 }

@@ -1,7 +1,8 @@
 package com.summercamp.charger.controllers;
 
 import com.summercamp.charger.models.StationType;
-import com.summercamp.charger.repositories.StationTypeRepository;
+import com.summercamp.charger.services.StationTypeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,25 +14,26 @@ import java.util.List;
 public class StationTypeController {
 
     @Autowired
-    private StationTypeRepository stationTypeRepository;
+    private StationTypeService stationTypeService;
 
     @GetMapping
     public List<StationType> getStationTypes(){
-        return stationTypeRepository.findAll();
+        return stationTypeService.getStationTypes();
     }
 
     @PostMapping
     public StationType saveStationType(@RequestBody StationType stationType){
-        return stationTypeRepository.save(stationType);
+        return stationTypeService.saveStationType(stationType);
     }
 
-    @DeleteMapping
-    public void deleteStationType(@RequestBody StationType stationType){stationTypeRepository.delete(stationType);}
+    @DeleteMapping(value = "/{id}")
+    public void deleteStationType(@PathVariable("id") Long Id){
+        stationTypeService.deleteStationType(Id);
+    }
 
-    @GetMapping(value = "/{id}")
-    public StationType getBookingAfterId(@PathVariable("id") Long Id) {return stationTypeRepository.findById(Id).get();}
-
-    @PutMapping
-    public StationType updateStationType(@RequestBody StationType stationType) {return stationTypeRepository.save(stationType);}
+    @PatchMapping(value = "/{id}")
+    public void updateStation(@PathVariable("id") Long Id, @RequestBody StationType stationType){
+        stationTypeService.updateStationType(Id, stationType);
+    }
 
 }

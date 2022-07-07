@@ -12,6 +12,7 @@
     <body>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="js/stationsController.js"></script>
 
         <nav class="navbar navbar-expand-lg bg-dark">
             <div class="container-fluid">
@@ -46,4 +47,85 @@
                 </div>
             </div>
         </nav>
+
+        <div class="content">
+            
+            <div class="addButton">
+                <button type="button" class="btn btn-primary btn-big" data-bs-toggle = "modal" data-bs-target="#addBackdrop" >Adauga</button>
+            </div>
+                        
+            <!-- tabel -->
+            <div class="stations-table">
+                <table id ="stations-table" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">IsOpen</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>            
+                </table>
+            </div>
+
+            <!--modal add-->
+            <div class="modal fade" id="addBackdrop" tabindex="-1" role="dialog" aria-labelledby="stationsLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="stationsLabel">Adauga statie</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                              <label for="inputName">Denumire</label>
+                              <input type="text" class="form-control" id="inputName">
+                            </div>
+                            <div class="form-group">
+                              <label for="inputIsOpen">Este deschis?</label>
+                              <input type="checkbox" class="form-control" id="inputIsOpen", value="isOpen">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputType">Tipul de statie</label>
+                                <input type="number" class="form-control" id="inputType">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLocation">Locatia</label>
+                                <input type="number" class="form-control" id="inputLocation">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onclick="addStation()" id="save-action">Add station</button>
+                    </div>
+                </div>
+            </div>
+
+             <!--modal delete-->
+             <div class="modal fade" id="deleteBackdrop" tabindex="-1" role="dialog" aria-labelledby="stationsLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="stationsLabel">Adauga statie</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        Esti sigur?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onclick="deleteStation({$id})" id="delete-action">Confirma</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </body>

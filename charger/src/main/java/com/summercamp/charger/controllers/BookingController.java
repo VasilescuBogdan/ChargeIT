@@ -2,9 +2,7 @@ package com.summercamp.charger.controllers;
 
 import com.summercamp.charger.dtos.BookingDto;
 import com.summercamp.charger.models.Booking;
-import com.summercamp.charger.models.Station;
-import com.summercamp.charger.repositories.BookingRepository;
-import com.summercamp.charger.repositories.StationRepository;
+import com.summercamp.charger.services.BookingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,36 +15,31 @@ import java.util.List;
 public class BookingController {
 
     @Autowired
-    private BookingRepository bookingRepository;
-
-    @Autowired
-    private StationRepository stationRepository;
+    private BookingService bookingService;
 
     @GetMapping
     public List<Booking> getBookings(){
-        return bookingRepository.findAll();
+        return bookingService.getBookings();
     }
+
 
     @PostMapping
     public Booking saveBooking(@RequestBody BookingDto bookingDto){
         
-        Station station = stationRepository.findById(bookingDto.getStationId())
-            .orElseThrow(() -> new RuntimeException("Error while retrieving stationDpo type "));
+        return bookingService.saveBooking(bookingDto);
 
-        Booking booking = new Booking();
-        booking.setStation(station);
-        booking.setStartDateTime(bookingDto.getStartDateTime());
-        booking.setDuration(bookingDto.getDuration());
-        booking.setLicenceCar(bookingDto.getLicenceCar()); 
-        
-        return bookingRepository.save(booking);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public void deleteBooking(@PathVariable("id") Long Id){
+        bookingService.deleteBooking(Id);
+    }
 
-    @DeleteMapping()
-    public void deleteBooking(@RequestBody Booking booking) {bookingRepository.delete(booking);}
+    @PatchMapping(value = "/{id}")
+    public void updateBooking(@PathVariable("id") Long Id, @RequestBody Booking booking){
+        
+        bookingService.updateBooking(Id, booking);
 
-    @GetMapping(value = "/{id}")
-    public Booking getBookingAfterId(@PathVariable("id") Long Id) {return bookingRepository.findById(Id).get();}
+    }
 
 }

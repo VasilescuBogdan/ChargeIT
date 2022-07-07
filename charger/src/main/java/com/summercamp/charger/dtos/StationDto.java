@@ -7,8 +7,6 @@ public class StationDto {
 
     private Long id;
 
-    private String address;
-
     private Boolean isOpen;
 
     private String name;
