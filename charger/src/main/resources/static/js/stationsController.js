@@ -6,8 +6,8 @@ function createElementFromAttribute(attribute, parent) {
 
 function createButtons(parent, data) {
     const buttonsTd = document.createElement("td");
-    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Update</button>
-    <button type="button" class="btn btn-primary btn-big" data-bs-toggle="modal">Delete</button>`;
+    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" data-bs-toggle="modal" data-bs-target="#updateBackdrop">Update</button>
+    <button type="button" class="btn btn-primary btn-big" data-bs-toggle="modal" data-bs-target="#deleteBackdrop">Delete</button>`;
     parent.appendChild(buttonsTd);
 }
 
@@ -42,7 +42,7 @@ if (responseJson.ok) {
 }
 })
 
-function addStation(){
+async function addStation(){
 
     const data = {
         name: $('#inputName').val(),
@@ -52,29 +52,33 @@ function addStation(){
     };
     
     
-    const responseJson = fetch(
+    const responseJson = await fetch(
         baseURL + '/api/stations',
         {
             method: 'POST',
-            headders: {
+            headers: {
                 'Content-Type' : 'application/json'
             },
             body: JSON.stringify(data)
         });
         
+        const response = responseJson.JSON;
         console.log(responseJson);
 }
 
-function deleteStation(id){
+async function deleteStation(id){
     
-    fetch(
+    const responseJson = await fetch(
         baseURL + '/api/stations/{id}',
         {
             method: 'DELETE',
-            headders: {
+            headers: {
                 'Content-Type' : 'application/json'
             },
         });
+
+    const response = responseJson.Json;
+    console.log(responseJson);
 }
 
 function updateStation(id){

@@ -31,9 +31,10 @@ public class BookingService {
 
         Booking booking = new Booking();
         booking.setStation(station);
-        booking.setStartDateTime(bookingDto.getStartDateTime());
-        booking.setDuration(bookingDto.getDuration());
-        booking.setLicenceCar(bookingDto.getLicenceCar()); 
+        booking.setStartDate(bookingDto.getStartDateTime());
+        booking.setEndDate(bookingDto.getStartDateTime().plusMinutes(bookingDto.getDuration()));
+        booking.setLicenceCar(bookingDto.getLicenceCar());
+        bookingRepository.findByEndDateAfterAndStartDateBeforeAndStation(booking.getStartDate(), booking.getEndDate(), station); 
         
         return bookingRepository.save(booking);
     }

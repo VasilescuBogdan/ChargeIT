@@ -86,19 +86,22 @@
                         <form>
                             <div class="form-group">
                               <label for="inputName">Denumire</label>
-                              <input type="text" class="form-control" id="inputName">
+                              <input type="text" class="form-control" id="inputName" required>
                             </div>
                             <div class="form-group">
                               <label for="inputIsOpen">Este deschis?</label>
-                              <input type="checkbox" class="form-control" id="inputIsOpen", value="isOpen">
+                              <select class="form-control" id="inputIsOpen", value="isOpen" required>
+                                    <option value="true"> da </option>
+                                    <option value="false"> nu </option>
+                              </select>
                             </div>
                             <div class="form-group">
                                 <label for="inputType">Tipul de statie</label>
-                                <input type="number" class="form-control" id="inputType">
+                                <input type="number" class="form-control" id="inputType" required>
                             </div>
                             <div class="form-group">
                                 <label for="inputLocation">Locatia</label>
-                                <input type="number" class="form-control" id="inputLocation">
+                                <input type="number" class="form-control" id="inputLocation" required>
                             </div>
                         </form>
                     </div>

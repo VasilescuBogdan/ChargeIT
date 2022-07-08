@@ -15,11 +15,11 @@ public class Booking {
     @Column(name = "Id", nullable = false)
     private Long id;
 
-    @Column(name = "StartDateTime", nullable = false)
-    private LocalDateTime startDateTime;
+    @Column(name = "StartDate", nullable = false)
+    private LocalDateTime startDate;
 
-    @Column(name = "Duration", nullable = false)
-    private Integer duration;
+    @Column(name = "EndDate", nullable = false)
+    private LocalDateTime endDate;
 
     @Column(name = "LicenceCar", nullable = false)
     private String licenceCar;

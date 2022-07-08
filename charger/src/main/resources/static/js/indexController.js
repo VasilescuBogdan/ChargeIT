@@ -49,7 +49,7 @@ $(document).ready(async function() {
     }
 })
 
-function addBooking(){    
+async function addBooking(){    
      
     const data = {
        startDateTime: $('#inputStartTime').val(),
@@ -63,12 +63,14 @@ function addBooking(){
         baseURL + '/api/bookings',
         {
             method: 'POST',
-            headders: {
+            headers: {
                 'Content-Type' : 'application/json'
             },
             body: JSON.stringify(data)
         });
     
+        
+    const response = responseJson.JSON;
     console.log(responseJson);
 }
 

@@ -63,9 +63,9 @@ public class StationService {
         return stationRepository.findAll(Sort.by(Sort.Direction.ASC, attribute));
     } 
 
-   /* 
+    
     public List<Station> getStationAfterName(String name){
-        return stationRepository.findStationAfterName(name);
+        return stationRepository.findStationByName(name);
     }
-    */
+    
 }

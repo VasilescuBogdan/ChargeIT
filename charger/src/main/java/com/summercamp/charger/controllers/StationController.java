@@ -22,7 +22,7 @@ public class StationController {
         return stationService.getStations();
     }
 
-    @GetMapping(value = "/{attribute}")
+    @GetMapping(value = "/sort/{attribute}")
     public List<Station> getStationsSorted(@PathVariable("attribute") String attribute) {
         return stationService.getStationsSorted(attribute);
     } 
@@ -42,11 +42,11 @@ public class StationController {
         stationService.updateStation(Id, station);
     }
 
-    /* 
+     
     @GetMapping(value = "/{name}")
     public List<Station> getStationAfterName(@PathVariable("name") String name){
         return stationService.getStationAfterName(name);
     }
-    */
+    
 
 }
