@@ -28,10 +28,6 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                         </li>
-                  
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="stations.html">Statii</a>
@@ -45,6 +41,10 @@
                             <a class="nav-link" href="locations.html">Locatii</a>
                         </li>
                     </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" id="searchResult" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" id="searchSubmit" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -52,17 +52,19 @@
       <div class="content">  
         <div class = "intro">
             <h1 id="title">Statii electrice</h1>
-            <p id="summary">
-                Aicea poti sa te programezi la unul din cele peste 1000 de statii de incarcare pentru masinile electrice.
-            </p>
         </div>
         <!-- tabel -->
         <div class="stations-table">
             <table id ="stations-table" class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">
+                            Id
+                            <button type="button" class="btn btn-primary btn-small" onclick="sortStations('id')">Sort</button> 
+                        </th>
+                        <th scope="col">Name
+                            <button type="button" class="btn btn-primary btn-small" onclick="sortStations('name')">Sort</button> 
+                        </th>
                         <th scope="col">Address</th>
                         <th scope="col">IsOpen</th>
                         <th scope="col">Type</th>
@@ -90,18 +92,22 @@
                         <div class="form-group">
                           <label for="inputStartTime">Data si ora</label>
                           <input type="datetime-local" class="form-control" id="inputStartTime" required>
+                          <div class="invalid-feedback">Alegeti o ora valida</div>
                         </div>
                         <div class="form-group">
                           <label for="inputDuration">Durata</label>
                           <input type="number" class="form-control" id="inputDuration" placeholder="pune durata" required>
+                          <div class="invalid-feedback">Alegeti o valoare valida</div>
                         </div>
                         <div class="form-group">
                             <label for="inputLicence">Numarul masinii</label>
                             <input type="text" class="form-control" id="inputLicence" placeholder="pune numarul de la masina" required>
+                            <div class="invalid-feedback">Format invalid</div>
                         </div>
                         <div class="form-group">
                             <label for="inputId">Id</label>
                             <input type="text" class="form-control" id="inputId" readonly>
+                            <div class="invalid-feedback">Id invalid</div>
                         </div>
                     </form>
                 </div>
@@ -111,6 +117,8 @@
             </div>
         </div>
           </div>
+
+          
       </div>
     </body>
 </html>

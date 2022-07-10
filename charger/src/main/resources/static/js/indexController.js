@@ -6,7 +6,7 @@ function createElementFromAttribute(attribute, parent) {
 
 function createButtons(parent, data) {
     const buttonsTd = document.createElement("td");
-    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog(${data.id}) data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book now!</button>`;
+    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog("${data.id}") data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book now!</button>`;
     parent.appendChild(buttonsTd);
 }
 
@@ -51,13 +51,31 @@ $(document).ready(async function() {
 
 async function addBooking(){    
      
+    /*'use strict';
+      
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation');
+      
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+      
+            form.classList.add('was-validated')
+        }, false)
+    });
+    */
+    
     const data = {
        startDateTime: $('#inputStartTime').val(),
        duration: $('#inputDuration').val(),
        licenceCar: $('#inputLicence').val(),
        stationId: $('#inputId').val()
     };
-
+    
 
     const responseJson = fetch(
         baseURL + '/api/bookings',
@@ -68,9 +86,78 @@ async function addBooking(){
             },
             body: JSON.stringify(data)
         });
-    
+
+
+        if(!responseJson.ok)
+            alert("This station is not available in this time slot\n");
         
-    const response = responseJson.JSON;
-    console.log(responseJson);
+        
 }
+
+$('#searchSubmit').on('click', async function(){
+    
+    const result = $('#searchResult').val(); 
+
+    const responseJson = await fetch(
+        baseURL + `/api/stations/search/` + result,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        const table = $("#stations-table tbody");
+        for (const station of response) {
+            const newStationTr = document.createElement("tr");
+            createElementFromAttribute(station.id, newStationTr);
+            createElementFromAttribute(station.name, newStationTr);
+            createElementFromAttribute(station.location.address, newStationTr);
+            createElementFromAttribute(station.isOpen, newStationTr);
+            createElementFromAttribute(station.stationType.name, newStationTr);
+            createElementFromAttribute(station.stationType.plugType, newStationTr);
+            createButtons(newStationTr, station);
+            table.append(newStationTr);
+        }
+    } else {
+        console.log("Errror ");
+    }
+})
+
+async function sortStations(attribute){
+    
+    
+    const responseJson = await fetch(
+        baseURL + `/api/stations/sort/` + attribute,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        const table = $("#stations-table tbody");
+        table.remove();
+        for (const station of response) {
+            const newStationTr = document.createElement("tr");
+            createElementFromAttribute(station.id, newStationTr);
+            createElementFromAttribute(station.name, newStationTr);
+            createElementFromAttribute(station.location.address, newStationTr);
+            createElementFromAttribute(station.isOpen, newStationTr);
+            createElementFromAttribute(station.stationType.name, newStationTr);
+            createElementFromAttribute(station.stationType.plugType, newStationTr);
+            createButtons(newStationTr, station);
+            table.append(newStationTr);
+        }
+    } else {
+        console.log("Errror ");
+    }
+}
+
 

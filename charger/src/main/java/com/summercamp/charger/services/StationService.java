@@ -64,8 +64,12 @@ public class StationService {
     } 
 
     
-    public List<Station> getStationAfterName(String name){
+    public Station getStationAfterName(String name){
         return stationRepository.findStationByName(name);
+    }
+
+    public Station getStationAfterId(Long Id){
+        return stationRepository.getById(Id);
     }
     
 }

@@ -43,9 +43,14 @@ public class StationController {
     }
 
      
-    @GetMapping(value = "/{name}")
-    public List<Station> getStationAfterName(@PathVariable("name") String name){
+    @GetMapping(value = "/search/{name}")
+    public Station getStationAfterName(@PathVariable("name") String name){
         return stationService.getStationAfterName(name);
+    }
+
+    @GetMapping(value = "/{id}")
+    public Station getAfterId(@PathVariable("id") Long Id){
+        return stationService.getStationAfterId(Id);
     }
     
 

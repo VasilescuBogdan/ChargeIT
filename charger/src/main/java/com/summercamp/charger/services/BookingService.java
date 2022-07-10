@@ -34,7 +34,10 @@ public class BookingService {
         booking.setStartDate(bookingDto.getStartDateTime());
         booking.setEndDate(bookingDto.getStartDateTime().plusMinutes(bookingDto.getDuration()));
         booking.setLicenceCar(bookingDto.getLicenceCar());
-        bookingRepository.findByEndDateAfterAndStartDateBeforeAndStation(booking.getStartDate(), booking.getEndDate(), station); 
+        
+        if(bookingRepository.findByEndDateAfterAndStartDateBeforeAndStation(booking.getStartDate(), booking.getEndDate(), station).size() > 0){
+            throw new RuntimeException("Error interval is overlapping.");
+        }; 
         
         return bookingRepository.save(booking);
     }
