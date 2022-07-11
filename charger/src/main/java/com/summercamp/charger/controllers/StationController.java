@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin("http://localhost:5500")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/stations")
 public class StationController {
@@ -50,8 +50,12 @@ public class StationController {
 
     @GetMapping(value = "/{id}")
     public Station getAfterId(@PathVariable("id") Long Id){
+        
+        System.out.println("ID = " + Id);
+        
         return stationService.getStationAfterId(Id);
     }
+    
     
 
 }

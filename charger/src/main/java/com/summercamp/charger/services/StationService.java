@@ -54,7 +54,7 @@ public class StationService {
     }
 
     public void updateStation(Long Id, Station newStation){
-        Station myStation = stationRepository.getById(Id); 
+        Station myStation = stationRepository.findById(Id).orElse(null); 
         myStation = newStation;
         stationRepository.save(myStation);
     }
@@ -65,11 +65,15 @@ public class StationService {
 
     
     public Station getStationAfterName(String name){
-        return stationRepository.findStationByName(name);
+        
+        
+        return stationRepository.findStationByNameContaining(name);
     }
 
     public Station getStationAfterId(Long Id){
-        return stationRepository.getById(Id);
+        
+        
+        return stationRepository.findById(Id).orElse(null); 
     }
     
 }

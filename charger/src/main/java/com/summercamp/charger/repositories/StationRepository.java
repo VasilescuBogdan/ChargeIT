@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface StationRepository extends JpaRepository<Station, Long> {
 
     
-    public Station findStationByName(@Param("name") String name);
+    public Station findStationByNameContaining(@Param("name") String name);
     
 }

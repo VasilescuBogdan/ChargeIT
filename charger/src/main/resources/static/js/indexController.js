@@ -94,7 +94,7 @@ async function addBooking(){
         
 }
 
-$('#searchSubmit').on('click', async function(){
+async function search(){
     
     const result = $('#searchResult').val(); 
 
@@ -111,21 +111,20 @@ $('#searchSubmit').on('click', async function(){
     if (responseJson.ok) {
         console.log(response);
         const table = $("#stations-table tbody");
-        for (const station of response) {
-            const newStationTr = document.createElement("tr");
-            createElementFromAttribute(station.id, newStationTr);
-            createElementFromAttribute(station.name, newStationTr);
-            createElementFromAttribute(station.location.address, newStationTr);
-            createElementFromAttribute(station.isOpen, newStationTr);
-            createElementFromAttribute(station.stationType.name, newStationTr);
-            createElementFromAttribute(station.stationType.plugType, newStationTr);
-            createButtons(newStationTr, station);
-            table.append(newStationTr);
-        }
+        table.empty();
+        const newStationTr = document.createElement("tr");
+        createElementFromAttribute(response.id, newStationTr);
+        createElementFromAttribute(response.name, newStationTr);
+        createElementFromAttribute(response.location.address, newStationTr);
+        createElementFromAttribute(response.isOpen, newStationTr);
+        createElementFromAttribute(response.stationType.name, newStationTr);
+        createElementFromAttribute(response.stationType.plugType, newStationTr);
+        createButtons(newStationTr, response);
+        table.append(newStationTr);
     } else {
         console.log("Errror ");
     }
-})
+}
 
 async function sortStations(attribute){
     
@@ -143,7 +142,7 @@ async function sortStations(attribute){
     if (responseJson.ok) {
         console.log(response);
         const table = $("#stations-table tbody");
-        table.remove();
+        table.empty();
         for (const station of response) {
             const newStationTr = document.createElement("tr");
             createElementFromAttribute(station.id, newStationTr);

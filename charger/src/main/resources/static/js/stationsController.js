@@ -47,11 +47,10 @@ async function addStation(){
     
     const data = {
         name: $('#inputName').val(),
-        isOpen: $('#inputIsOpen')[0].checked,
-        type: $('#inputType').val(),
-        location: $('#inputLocation').val()
-    };
-    
+        isOpen: $('#inputIsOpen').val(),
+        stationTypeId: $('#inputType').val(),
+        locationId: $('#inputLocation').val()
+    };    
     
     const responseJson = await fetch(
         baseURL + `/api/stations`,
@@ -90,7 +89,7 @@ async function updateStationInit(id){
     $("inputIsOpen").val(data.isOpen); 
     $("inputType").val(data.stationType.id);
     $("inputLocation").val(data.location.id);
-    const myModalEl = document.getElementById('updateBackdrop');
+    const myModalEl = document.getElementById('updateForm');
     const modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
     modal.show();
 }
