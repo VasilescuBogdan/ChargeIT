@@ -53,10 +53,24 @@ public class StationService {
         stationRepository.delete(stationRepository.getById(Id));
     }
 
-    public void updateStation(Long Id, Station newStation){
-        Station myStation = stationRepository.findById(Id).orElse(null); 
-        myStation = newStation;
-        stationRepository.save(myStation);
+    public Station updateStation(StationDto stationDto){
+        
+        Station station = stationRepository.findById(stationDto.getId())
+            .orElseThrow(() -> new RuntimeException("Error while retrieving stationDto type ")); 
+
+        StationType stationType = stationTypeRepository.findById(stationDto.getStationTypeId())
+            .orElseThrow(() -> new RuntimeException("Error while retrieving stationDto type."));
+        
+        Location location = locationRepository.findById(stationDto.getLocationId())
+                .orElseThrow(() -> new RuntimeException("Error while retrieving stationDto type."));
+
+        station.setStationType(stationType);
+        station.setLocation(location);
+        station.setName(stationDto.getName());
+        station.setIsOpen(stationDto.getIsOpen());
+
+        return stationRepository.save(station);
+
     }
 
     public List<Station> getStationsSorted(String attribute) {
@@ -65,15 +79,12 @@ public class StationService {
 
     
     public Station getStationAfterName(String name){
-        
-        
         return stationRepository.findStationByNameContaining(name);
     }
 
     public Station getStationAfterId(Long Id){
         
-        
-        return stationRepository.findById(Id).orElse(null); 
+        return stationRepository.findById(Id).orElseThrow(() -> new RuntimeException("There is no such Id")); 
     }
     
 }

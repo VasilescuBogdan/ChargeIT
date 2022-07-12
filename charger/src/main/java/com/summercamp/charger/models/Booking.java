@@ -24,7 +24,7 @@ public class Booking {
     @Column(name = "LicenceCar", nullable = false)
     private String licenceCar;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "station_id", nullable = false)
     private Station station;
 

@@ -35,11 +35,20 @@ public class BookingController {
         bookingService.deleteBooking(Id);
     }
 
-    @PatchMapping(value = "/{id}")
-    public void updateBooking(@PathVariable("id") Long Id, @RequestBody Booking booking){
-        
-        bookingService.updateBooking(Id, booking);
-
+    @PatchMapping()
+    public Booking updateBooking(@RequestBody BookingDto bookingDto){
+        return bookingService.updateBooking(bookingDto);
     }
+
+    @GetMapping(value = "/{id}")
+    public Booking getAfterId(@PathVariable("id") Long Id){
+        
+        return bookingService.getBookingAfterId(Id);
+    }
+
+    @GetMapping(value = "/sort/{attribute}")
+    public List<Booking> getBookingsSorted(@PathVariable("attribute") String attribute) {
+        return bookingService.getBookingsSorted(attribute);
+    } 
 
 }

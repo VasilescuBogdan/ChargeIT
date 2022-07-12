@@ -20,7 +20,7 @@ public class Location {
     @Column(name = "City", nullable = false)
     private String city;
     
-    @Column(name = "Address", nullable = false)
+    @Column(name = "Address", nullable = false, unique = true)
     private String address;
 
     @Column(name = "CoordX", nullable = false)

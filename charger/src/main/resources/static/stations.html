@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="en">
     <head>
         <title>Statii</title>
-        
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -39,6 +40,10 @@
                         <li class="nav-item">
                             <a class="nav-link"  href="locations.html">Locatii</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="bookings.html">Bookings</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -55,7 +60,6 @@
                 <table id ="stations-table" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Id</th>
                             <th scope="col">Name</th>
                             <th scope="col">IsOpen</th>
                             <th scope="col">Type</th>
@@ -71,77 +75,83 @@
             <!--modal add-->
             <div class="modal fade" id="addBackdrop" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="stationsLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="stationsLabel">Adauga statie</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                              <label for="inputName">Denumire</label>
-                              <input type="text" class="form-control" id="inputName" required>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-check-input" value="true" type="checkbox" id="inputIsOpen">
-                                <label class="form-check-label" for="inputIsOpen">
-                                  Este deschis?
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputType">Tipul de statie</label>
-                                <input type="number" class="form-control" id="inputType" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputLocation">Locatia</label>
-                                <input type="number" class="form-control" id="inputLocation" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" onclick="addStation()" id="save-action">Add station</button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="stationsLabel">Adauga statie</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="inputName">Name</label>
+                                    <input type="text" class="form-control" id="inputName" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-check-input" value="true" type="checkbox" id="inputIsOpen">
+                                    <label class="form-check-label" for="inputIsOpen"> Is open? </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputType">Station type</label>
+                                    <input type="number" class="form-control" id="inputType" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputLocation">Location</label>
+                                    <input type="number" class="form-control" id="inputLocation" required>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="addStation()" id="save-action">Add station</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
+            
             <!--update modal-->
             <div class="modal fade" id="updateForm" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="stationsLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="stationsLabel">Adauga statie</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                              <label for="inputName">Denumire</label>
-                              <input type="text" class="form-control" id="inputName" required>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" id="inputIsOpen">
-                                <label class="form-check-label" for="inputIsOpen">
-                                  Este deschis?
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputType">Tipul de statie</label>
-                                <input type="number" class="form-control" id="inputType" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputLocation">Locatia</label>
-                                <input type="number" class="form-control" id="inputLocation" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" onclick="addStation()" id="save-action">Add station</button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="stationsLabel">Update statie</h5>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="inputName">Denumire</label>
+                                    <input type="text" class="form-control" id="inputUpdateName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input class="form-check-input" type="checkbox" value="true" id="inputIsOpen">
+                                    <label class="form-check-label" for="inputUpdateIsOpen">
+                                        Este deschis?
+                                    </label>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputType">Tipul de statie</label>
+                                    <input type="number" class="form-control" id="inputUpdateType" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputLocation">Locatia</label>
+                                    <input type="number" class="form-control" id="inputUpdateLocation" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-big" onClick="updateStation()">Update</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+</html>

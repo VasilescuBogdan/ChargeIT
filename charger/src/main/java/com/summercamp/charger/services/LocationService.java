@@ -26,9 +26,22 @@ public class LocationService {
         locationRepository.delete(locationRepository.getById(Id));
     }
 
-    public void updateLocation(Long Id, Location newLocation){
-        Location myLocation = locationRepository.getById(Id); 
-        myLocation = newLocation;
-        locationRepository.save(myLocation);
+    public Location updateLocation(Location location){
+        
+        Location newLocation = locationRepository.findById(location.getId())
+            .orElseThrow(() -> new RuntimeException("Error while retrieving location type "));
+        
+        newLocation.setAddress(location.getAddress());
+        newLocation.setCity(location.getCity());
+        newLocation.setCoordinateX(location.getCoordinateX());
+        newLocation.setCoordinateY(location.getCoordinateY());
+
+        return locationRepository.save(newLocation);
     }
+
+    public Location getLocationAfterId(Long Id){
+        
+        return locationRepository.findById(Id).orElseThrow(() -> new RuntimeException("There is no such Id")); 
+    }
+
 }

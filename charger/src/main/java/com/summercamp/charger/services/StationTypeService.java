@@ -26,10 +26,21 @@ public class StationTypeService {
         stationTypeRepository.delete(stationTypeRepository.getById(Id));
     }
 
-    public void updateStationType(Long Id, StationType newStationType){
-        StationType myStationType = stationTypeRepository.getById(Id); 
-        myStationType = newStationType;
-        stationTypeRepository.save(myStationType);
+    public StationType updateStationType(StationType stationType){
+
+        StationType newStationType = stationTypeRepository.findById(stationType.getId())
+            .orElseThrow(() -> new RuntimeException("Error while retrieving stationType type "));
+        
+        newStationType.setName(stationType.getName());
+        newStationType.setPlugType(stationType.getPlugType());
+        newStationType.setPower(stationType.getPower());
+
+        return stationTypeRepository.save(newStationType);
+    }
+
+    public StationType getStationTypeAfterId(Long Id){
+        
+        return stationTypeRepository.findById(Id).orElseThrow(() -> new RuntimeException("There is no such Id")); 
     }
 
 }

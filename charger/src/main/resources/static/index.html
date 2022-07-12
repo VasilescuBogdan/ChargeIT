@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="en">
     <head>
         <title>ChargeIT</title>
-        
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -13,6 +16,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="js/indexController.js"></script>
+        
 
         <!--navbar-->
         <nav class="navbar navbar-expand-lg bg-dark">
@@ -40,6 +44,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="locations.html">Locatii</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="bookings.html">Bookings</a>
+                        </li>
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" id="searchResult" type="search" placeholder="Search" aria-label="Search">
@@ -49,76 +57,79 @@
             </div>
         </nav>
       
-      <div class="content">  
-        <div class = "intro">
-            <h1 id="title">Statii electrice</h1>
-        </div>
-        <!-- tabel -->
-        <div class="stations-table">
-            <table id ="stations-table" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">
-                            Id
-                            <button type="button" class="btn btn-primary btn-small" onclick="sortStations('id')">Sort</button> 
-                        </th>
-                        <th scope="col">Name
-                            <button type="button" class="btn btn-primary btn-small" onclick="sortStations('name')">Sort</button> 
-                        </th>
-                        <th scope="col">Address</th>
-                        <th scope="col">IsOpen</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">PlugType</th>
-                        <th scope="col">#</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>            
-            </table>
-        </div>
-
-        <!--modal-->
-        <div class="modal fade" id="staticBackdrop" tabindex="-1" role="dialog" aria-labelledby="bookingLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="bookingsLabel">Booking</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                          <label for="inputStartTime">Data si ora</label>
-                          <input type="datetime-local" class="form-control" id="inputStartTime" required>
-                          <div class="invalid-feedback">Alegeti o ora valida</div>
-                        </div>
-                        <div class="form-group">
-                          <label for="inputDuration">Durata</label>
-                          <input type="number" class="form-control" id="inputDuration" placeholder="pune durata" required>
-                          <div class="invalid-feedback">Alegeti o valoare valida</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputLicence">Numarul masinii</label>
-                            <input type="text" class="form-control" id="inputLicence" placeholder="pune numarul de la masina" required>
-                            <div class="invalid-feedback">Format invalid</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputId">Id</label>
-                            <input type="text" class="form-control" id="inputId" readonly>
-                            <div class="invalid-feedback">Id invalid</div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" onclick="addBooking()" id="save-action">Save changes</button>
-                </div>
+        <div class="content">  
+            <div class = "intro">
+                <h1 id="title">Statii electrice</h1>
             </div>
-        </div>
-          </div>
+        
+            <!-- tabel -->
+            <div class="stations-table">
+                <table id ="stations-table" class="table">
+                    <thead>
+                        <tr>
+                            <th type="button" onclick="sortStations('name')" scope="col">Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">IsOpen</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">PlugType</th>
+                            <th scope="col">#</th>
+                        </tr>
+                    </thead>
+                
+                    <tbody>
+                    </tbody>            
+                </table>
+            </div>
 
-          
-      </div>
+            <!--modal-->
+            <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="bookingLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="bookingsLabel">Booking</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="inputStartTime">Data si ora</label>
+                                    <input type="datetime-local" class="form-control" id="inputStartTime" required>
+                                    <div class="invalid-feedback">Alegeti o ora valida</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputDuration">Durata</label>
+                                    <input type="number" class="form-control" id="inputDuration" placeholder="pune durata" required>
+                                    <div class="invalid-feedback">Alegeti o valoare valida</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputLicence">Numarul masinii</label>
+                                    <input type="text" class="form-control" id="inputLicence" placeholder="pune numarul de la masina" required>
+                                    <div class="invalid-feedback">Format invalid</div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="inputId" readonly>
+                                    <div class="invalid-feedback">Id invalid</div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="addBooking()" id="save-action">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+            <!-- Map -->
+            <div id="map"></div>
+
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn3dK4iamN8xCBVJzVIvMwEbyRUdylRA4&callback=initMap"></script>
+
+        </div>
     </body>
 </html>

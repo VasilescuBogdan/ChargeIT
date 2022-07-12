@@ -38,8 +38,8 @@ public class StationController {
     }
 
     @PatchMapping(value = "/{id}")
-    public void updateStation(@PathVariable("id") Long Id, @RequestBody Station station){
-        stationService.updateStation(Id, station);
+    public void updateStation(@RequestBody StationDto station){
+        stationService.updateStation(station);
     }
 
      
@@ -50,8 +50,6 @@ public class StationController {
 
     @GetMapping(value = "/{id}")
     public Station getAfterId(@PathVariable("id") Long Id){
-        
-        System.out.println("ID = " + Id);
         
         return stationService.getStationAfterId(Id);
     }

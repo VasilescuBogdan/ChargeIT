@@ -35,7 +35,6 @@ $(document).ready(async function() {
         const table = $("#stations-table tbody");
         for (const station of response) {
             const newStationTr = document.createElement("tr");
-            createElementFromAttribute(station.id, newStationTr);
             createElementFromAttribute(station.name, newStationTr);
             createElementFromAttribute(station.location.address, newStationTr);
             createElementFromAttribute(station.isOpen, newStationTr);
@@ -113,7 +112,6 @@ async function search(){
         const table = $("#stations-table tbody");
         table.empty();
         const newStationTr = document.createElement("tr");
-        createElementFromAttribute(response.id, newStationTr);
         createElementFromAttribute(response.name, newStationTr);
         createElementFromAttribute(response.location.address, newStationTr);
         createElementFromAttribute(response.isOpen, newStationTr);
@@ -145,7 +143,6 @@ async function sortStations(attribute){
         table.empty();
         for (const station of response) {
             const newStationTr = document.createElement("tr");
-            createElementFromAttribute(station.id, newStationTr);
             createElementFromAttribute(station.name, newStationTr);
             createElementFromAttribute(station.location.address, newStationTr);
             createElementFromAttribute(station.isOpen, newStationTr);
@@ -158,5 +155,16 @@ async function sortStations(attribute){
         console.log("Errror ");
     }
 }
+
+let map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
+}
+
+window.initMap = initMap;
 
 

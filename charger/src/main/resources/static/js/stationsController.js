@@ -6,8 +6,8 @@ function createElementFromAttribute(attribute, parent) {
 
 function createButtons(parent, data) {
     const buttonsTd = document.createElement("td");
-    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" data-bs-toggle="modal" data-bs-target="#updateBackdrop" onClick="updateStationInit(${data.id})">Update</button>
-    <button type="button" class="btn btn-primary btn-big" data-bs-toggle="modal" onClick="deleteStation(${data.id})">Delete</button>`;
+    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onClick="updateStationInit(${data.id})">Update</button>
+    <button type="submit" class="btn btn-primary btn-big" onClick="deleteStation(${data.id})">Delete</button>`;
     parent.appendChild(buttonsTd);
 }
 
@@ -29,11 +29,10 @@ if (responseJson.ok) {
     const table = $("#stations-table tbody");
     for (const station of response) {
         const newStationTr = document.createElement("tr");
-        createElementFromAttribute(station.id, newStationTr);
         createElementFromAttribute(station.name, newStationTr);
         createElementFromAttribute(station.isOpen, newStationTr);
-        createElementFromAttribute(station.stationType.id, newStationTr);
-        createElementFromAttribute(station.location.id, newStationTr);
+        createElementFromAttribute(station.stationType.name, newStationTr);
+        createElementFromAttribute(station.location.address, newStationTr);
         createButtons(newStationTr, station);
         table.append(newStationTr);
     }
@@ -64,6 +63,7 @@ async function addStation(){
         
         const response = responseJson.JSON;
         console.log(responseJson);
+        window.location.reload();
 }
 
 async function deleteStation(id){
@@ -79,16 +79,19 @@ async function deleteStation(id){
 
     const response = responseJson.Json;
     console.log(responseJson);
+    window.location.reload();
 }
 
 async function updateStationInit(id){
     
     console.log(id);
     const data = await fetchData(id);
-    $("#inputName").val(data.name);
-    $("inputIsOpen").val(data.isOpen); 
-    $("inputType").val(data.stationType.id);
-    $("inputLocation").val(data.location.id);
+    
+    $("#inputUpdateName").val(data.name);
+    $("#inputUpdateIsOpen").val(data.isOpen); 
+    $("#inputUpdateType").val(data.stationType.id);
+    $("#inputUpdateLocation").val(data.location.id);
+
     const myModalEl = document.getElementById('updateForm');
     const modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
     modal.show();
@@ -107,17 +110,18 @@ async function fetchData(id){
     return response;
 }
 
-async function updateStation(id){
+async function updateStation(){
     
     const data = {
+        id: $('#inputUpdateId').val(),
         name: $('#inputName').val(),
-        isOpen: $('#inputIsOpen')[0].checked,
-        type: $('#inputType').val(),
-        location: $('#inputLocation').val()
+        isOpen: $('#inputIsOpen').val(),
+        stationTypeId: $('#inputType').val(),
+        locationId: $('#inputLocation').val()
     };
 
     const responseJson = await fetch(
-        baseURL + `/api/stations/` + id,
+        baseURL + `/api/stations`,
         {
             method: 'PATCH',
             headers: {
@@ -128,6 +132,7 @@ async function updateStation(id){
         
         const response = responseJson.JSON;
         console.log(responseJson);
+        window.location.reload();
 }
 
 

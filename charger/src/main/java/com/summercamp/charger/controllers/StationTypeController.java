@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin("http://localhost:5500")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/stationTypes")
 public class StationTypeController {
@@ -31,9 +31,14 @@ public class StationTypeController {
         stationTypeService.deleteStationType(Id);
     }
 
-    @PatchMapping(value = "/{id}")
-    public void updateStation(@PathVariable("id") Long Id, @RequestBody StationType stationType){
-        stationTypeService.updateStationType(Id, stationType);
+    @PatchMapping()
+    public StationType updateStation(@RequestBody StationType stationType){
+        return stationTypeService.updateStationType(stationType);
+    }
+
+    @GetMapping(value = "/{id}")
+    public StationType getStationTypeAfterId(@PathVariable("id") Long Id){
+        return stationTypeService.getStationTypeAfterId(Id);
     }
 
 }

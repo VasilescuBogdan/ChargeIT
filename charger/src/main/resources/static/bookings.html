@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="en">
     <head>
-        <title>Tipuri de statii</title>
+        <title>Bookings</title>
         
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,9 @@
     <body>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="js/stationTypesController.js"></script>
+        <script src="js/bookingsController.js"></script>
 
+        <!--navbar-->
         <nav class="navbar navbar-expand-lg bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#" style="color:white">Charge.it</a>
@@ -33,7 +34,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="stationTypes.html">Tipuri de statii</a>
+                            <a class="nav-link" href="stationTypes.html">Tipuri de statii</a>
                         </li>
 
                         <li class="nav-item">
@@ -41,71 +42,32 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="bookings.html">Bookings</a>
+                            <a class="nav-link active" aria-current="page" href="bookings.html">Bookings</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <div class="content">
-            
-            <div class="addButton">
-                <button type="button" class="btn btn-primary btn-big" data-bs-toggle = "modal" data-bs-target="#addForm" >Adauga</button>
-            </div>
-                        
+        <div class="content">  
             <!-- tabel -->
             <div>
-                <table id ="station-types-table" class="table">
+                <table id ="bookings-table" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Plug type</th>
-                            <th scope="col">Power</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Licence car</th>
+                            <th scope="col">Station</th>
                             <th scope="col">#</th>
                         </tr>
                     </thead>
-
+                    
                     <tbody>
                     </tbody>            
                 </table>
             </div>
-
-            <!--modal add-->
-            <div class="modal fade" id="addForm" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="stationsLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="stationsLabel">Add station type</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="inputName">Name</label>
-                                    <input type="text" class="form-control" id="inputName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPlugType">Plug type</label>
-                                    <input type="text" class="form-control" id="inputPlugType" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPower">Power</label>
-                                    <input type="number" class="form-control" id="inputPower" required>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" onclick="addStationType()" id="save-action">Add station type</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+    
             <!--update modal-->
             <div class="modal fade" id="updateForm" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="stationsLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -120,27 +82,35 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" id="inputUpdateId" required>
+                                    <label for="inputStartTime">Start date</label>
+                                    <input type="datetime-local" class="form-control" id="inputStartTime" required>
+                                    <div class="invalid-feedback">Alegeti o ora valida</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputDuration">Durata</label>
+                                    <input type="number" class="form-control" id="inputDuration" placeholder="pune durata" required>
+                                    <div class="invalid-feedback">Alegeti o valoare valida</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputLicence">Numarul masinii</label>
+                                    <input type="text" class="form-control" id="inputLicence" placeholder="pune numarul de la masina" required>
+                                    <div class="invalid-feedback">Format invalid</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputUpdateName">Name</label>
-                                    <input type="text" class="form-control" id="inputUpdateName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUpdatePlugType">Plug type</label>
-                                    <input type="text" class="form-control" id="inputUpdatePlugType" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputUpdatePower">Power</label>
-                                    <input type="number" class="form-control" id="inputUpdatePower" required>
+                                    <label for="inputId">Id</label>
+                                    <input type="text" class="form-control" id="inputId" readonly>
+                                    <div class="invalid-feedback">Id invalid</div>
                                 </div>
                             </form>
                         </div>
+                            
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary btn-big" onClick="updateStationType()">Update</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+</html>    

@@ -15,7 +15,7 @@ public class StationType {
     @Column(name = "Power", nullable = false)
     private Integer power;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "Name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "PlugType", nullable = false)

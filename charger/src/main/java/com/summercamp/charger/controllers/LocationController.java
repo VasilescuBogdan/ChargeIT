@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-//@CrossOrigin("http://localhost:5500")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/locations")
 public class LocationController {
@@ -33,9 +33,14 @@ public class LocationController {
         locationService.deleteLocation(Id);
     }
 
-    @PatchMapping(value = "/{id}")
-    public void updateLocation(@PathVariable("id") Long Id, @RequestBody Location location){
-        locationService.updateLocation(Id, location);
+    @PatchMapping()
+    public Location updateLocation(@RequestBody Location location){
+        return locationService.updateLocation(location);
+    }
+
+    @GetMapping(value = "/{id}")
+    public Location getLocationAfterId(@PathVariable("id") Long Id){
+        return locationService.getLocationAfterId(Id);
     }
 
 }
