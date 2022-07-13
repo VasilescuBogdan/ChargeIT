@@ -33,6 +33,7 @@ $(document).ready(async function() {
             createElementFromAttribute(location.coordinateX, newLocationTr);
             createElementFromAttribute(location.coordinateY, newLocationTr);
             createButtons(newLocationTr, location);
+            createPushPin(null, location.coordinateY, location.coordinateX, location.address)
             table.append(newLocationTr);
         }
     } else {
@@ -82,3 +83,36 @@ async function deleteLocation(id){
 
     window.location.reload();
 }
+
+
+function createPushPin(name, lat, long, content){
+    const pos = {lat: lat, lng: long};
+    const window = new google.maps.InfoWindow({
+        content: content
+    })
+    const marker = new google.maps.Marker({
+        position: pos,
+        map,
+        title: name,
+      });
+
+    marker.addListener("click", () => {
+        window.open({
+            anchor: marker,
+            map,
+            shouldFocus: false,
+        });
+    });
+}
+
+let map;
+
+function initMap() {
+    const center = {lng: 23.82568, lat: 44.29849};
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: center,
+        zoom: 8,  
+    });
+}
+
+window.initMap = initMap;

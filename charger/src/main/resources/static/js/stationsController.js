@@ -114,10 +114,10 @@ async function updateStation(){
     
     const data = {
         id: $('#inputUpdateId').val(),
-        name: $('#inputName').val(),
-        isOpen: $('#inputIsOpen').val(),
-        stationTypeId: $('#inputType').val(),
-        locationId: $('#inputLocation').val()
+        name: $('#inputUpdateName').val(),
+        isOpen: $('#inputUpdateIsOpen').val(),
+        stationTypeId: $('#inputUpdateType').val(),
+        locationId: $('#inputUpdateLocation').val()
     };
 
     const responseJson = await fetch(
