@@ -6,16 +6,20 @@ function createElementFromAttribute(attribute, parent) {
 
 function createButtons(parent, data) {
     const buttonsTd = document.createElement("td");
-    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog("${data.id}") data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book now!</button>`;
+    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog("${data.id}") data-bs-toggle="modal">Book now!</button>`;
     parent.appendChild(buttonsTd);
 }
 
-function showDialog(id){
-    console.log(id);
-    $("#inputId").val(id);
-    var myModalEl = document.getElementById('staticBackdrop');
-    var modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
-    modal.show();
+function showDialog(id){    
+    if ($("#inputIsOpen").is(":checked")){
+        console.log(id);
+        $("#inputId").val(id);
+        var myModalEl = document.getElementById('stationsForm');
+        var modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+        modal.show();
+    } else {
+        alert("This station is not open")
+    }
 }
 
 const baseURL = 'http://localhost:8090';
@@ -74,7 +78,6 @@ async function addBooking(){
        licenceCar: $('#inputLicence').val(),
        stationId: $('#inputId').val()
     };
-    
 
     const responseJson = fetch(
         baseURL + '/api/bookings',
@@ -85,11 +88,10 @@ async function addBooking(){
             },
             body: JSON.stringify(data)
         });
-
-
+    
+    
         if(!responseJson.ok)
-            alert("This station is not available in this time slot\n");
-        
+            alert("This station is not available in this time slot\n");        
         
 }
 
@@ -155,5 +157,17 @@ async function sortStations(attribute){
         console.log("Errror ");
     }
 }
+
+let map;
+
+function initMap() {
+    const center = {lng: 23.82568, lat: 44.29849};
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: center,
+        zoom: 8,  
+    });
+}
+
+window.initMap = initMap;
 
 

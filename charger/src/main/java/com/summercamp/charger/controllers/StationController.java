@@ -37,7 +37,7 @@ public class StationController {
         stationService.deleteStation(Id);
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping()
     public void updateStation(@RequestBody StationDto station){
         stationService.updateStation(station);
     }

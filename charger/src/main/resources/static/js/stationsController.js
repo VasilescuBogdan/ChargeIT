@@ -46,7 +46,7 @@ async function addStation(){
     
     const data = {
         name: $('#inputName').val(),
-        isOpen: $('#inputIsOpen').val(),
+        isOpen: $('#inputIsOpen').is(":checked"),
         stationTypeId: $('#inputType').val(),
         locationId: $('#inputLocation').val()
     };    
@@ -86,7 +86,8 @@ async function updateStationInit(id){
     
     console.log(id);
     const data = await fetchData(id);
-    
+
+    $("#inputUpdateId").val(id)
     $("#inputUpdateName").val(data.name);
     $("#inputUpdateIsOpen").val(data.isOpen); 
     $("#inputUpdateType").val(data.stationType.id);
@@ -115,7 +116,7 @@ async function updateStation(){
     const data = {
         id: $('#inputUpdateId').val(),
         name: $('#inputUpdateName').val(),
-        isOpen: $('#inputUpdateIsOpen').val(),
+        isOpen: $('#inputUpdateIsOpen').is(":checked"),
         stationTypeId: $('#inputUpdateType').val(),
         locationId: $('#inputUpdateLocation').val()
     };
@@ -133,6 +134,7 @@ async function updateStation(){
         const response = responseJson.JSON;
         console.log(responseJson);
         window.location.reload();
+        
 }
 
 
