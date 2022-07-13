@@ -11,15 +11,11 @@ function createButtons(parent, data) {
 }
 
 function showDialog(id){    
-    if ($("#inputIsOpen").is(":checked")){
         console.log(id);
         $("#inputId").val(id);
-        var myModalEl = document.getElementById('stationsForm');
+        var myModalEl = document.getElementById('addForm');
         var modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
         modal.show();
-    } else {
-        alert("This station is not open")
-    }
 }
 
 const baseURL = 'http://localhost:8090';
