@@ -66,6 +66,37 @@ async function addStation(){
         window.location.reload();
 }
 
+async function sortStations(attribute){
+    
+    
+    const responseJson = await fetch(
+        baseURL + `/api/stations/sort/` + attribute,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        const table = $("#stations-table tbody");
+        table.empty();
+        for (const station of response) {
+            const newStationTr = document.createElement("tr");
+            createElementFromAttribute(station.name, newStationTr);
+            createElementFromAttribute(station.isOpen, newStationTr);
+            createElementFromAttribute(station.stationType.name, newStationTr);
+            createElementFromAttribute(station.location.address, newStationTr);
+            createButtons(newStationTr, station);
+            table.append(newStationTr);
+        }
+    } else {
+        console.log("Errror ");
+    }
+}
+
 async function deleteStation(id){
     
     const responseJson = await fetch(

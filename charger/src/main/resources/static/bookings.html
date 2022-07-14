@@ -55,10 +55,18 @@
                 <table id ="bookings-table" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Licence car</th>
-                            <th scope="col">Station</th>
+                            <th scope="col">
+                                <p type="button" onclick="sortBooking('startDate')">Start Date</p>
+                            </th>
+                            <th scope="col">
+                                <p type="button" onclick="sortBooking('endDate')">End Date</p>
+                            </th>
+                            <th scope="col">
+                                <p type="button" onclick="sortBooking('licenceCar')">Licence car</p>
+                            </th>
+                            <th scope="col">
+                                <p type="button" onclick="sortBooking('station.name')">Station</p>
+                            </th>
                             <th scope="col">#</th>
                         </tr>
                     </thead>

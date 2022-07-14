@@ -67,9 +67,13 @@
                 <table id ="stations-table" class="table">
                     <thead>
                         <tr>
-                            <th type="button" onclick="sortStations('name')" scope="col">Name</th>
+                            <th scope="col"> 
+                                <a type="button" onclick="sortStations('name')">Name</a>
+                            </th>
                             <th scope="col">Address</th>
-                            <th scope="col">IsOpen</th>
+                            <th scope="col">
+                                <p type="button" onclick="sortStations('isOpen')">IsOpen</p>
+                            </th>
                             <th scope="col">Type</th>
                             <th scope="col">PlugType</th>
                             <th scope="col">#</th>
@@ -82,7 +86,7 @@
             </div>
 
             <!--modal-->
-            <div class="modal fade" id="stationsForm" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="bookingLabel" aria-hidden="true">
+            <div class="modal fade" id="addForm" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="bookingLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

@@ -43,7 +43,7 @@ $(document).ready(async function() {
 async function deleteBooking(id){
     
     const responseJson = await fetch(
-        baseURL + `/api/locations/` + id,
+        baseURL + `/api/bookings/` + id,
         {
             method: 'DELETE',
             headers: {
@@ -53,7 +53,7 @@ async function deleteBooking(id){
 
     const response = responseJson.Json;
     console.log(responseJson);
-    window.location.reload();
+    //window.location.reload();
 }
 
 async function sortBooking(attribute){
@@ -72,6 +72,7 @@ async function sortBooking(attribute){
         if (responseJson.ok) {
             console.log(response);
             const table = $("#bookings-table tbody");
+            table.empty();
         for (const booking of response) {
             const newBookingTr = document.createElement("tr");
             createElementFromAttribute(booking.startDate, newBookingTr);
@@ -85,3 +86,5 @@ async function sortBooking(attribute){
         console.log("Errror ");
     }
 }
+
+//as

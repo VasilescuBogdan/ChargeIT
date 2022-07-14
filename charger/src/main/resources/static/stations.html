@@ -52,16 +52,20 @@
         <div class="content">
             
             <div class="addButton">
-                <button type="button" class="btn btn-primary btn-big" data-bs-toggle = "modal" data-bs-target="#addBackdrop" >Adauga</button>
+                <button type="button" class="btn btn-primary btn-big" data-bs-toggle = "modal" data-bs-target="#addForm" >Adauga</button>
             </div>
                         
             <!-- tabel -->
-            <div class="stations-table">
+            <div class="table-cont">
                 <table id ="stations-table" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">IsOpen</th>
+                            <th scope="col"> 
+                                <p type="button" onclick="sortStations('name')">Name</p>
+                            </th>
+                            <th scope="col">
+                                <p type="button" onclick="sortStations('isOpen')">IsOpen</p>
+                            </th>
                             <th scope="col">Type</th>
                             <th scope="col">Location</th>
                             <th scope="col">#</th>

@@ -87,7 +87,9 @@ async function addBooking(){
     
     
         if(!responseJson.ok)
-            alert("This station is not available in this time slot\n");        
+            alert("This station is not available in this time slot\n");
+            
+    window.location.reload();
         
 }
 
