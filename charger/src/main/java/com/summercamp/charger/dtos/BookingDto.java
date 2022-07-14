@@ -9,7 +9,7 @@ public class BookingDto {
     
     private Long id;
 
-    private LocalDateTime startDateTime;
+    private LocalDateTime startDate;
     
     private Integer duration;
 

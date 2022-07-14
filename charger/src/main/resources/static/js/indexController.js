@@ -4,9 +4,13 @@ function createElementFromAttribute(attribute, parent) {
     parent.appendChild(openCell);
 }
 
+
 function createButtons(parent, data) {
     const buttonsTd = document.createElement("td");
-    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog("${data.id}")>Book now!</button>`;
+    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog("${data.id}")>Book now!</button>
+    <button type="button" class ="btn btn-secondary btn-big" onclick="location.href='https://www.google.com/maps/search/?api=1&query=${data.location.coordinateY}%2C${data.location.coordinateX}'">Located here</button>`
+    if(!data.isOpen)
+        buttonsTd.innerHTML = `<button type="button" class ="btn btn-secondary btn-big" onclick="location.href='https://www.google.com/maps/search/?api=1&query=${data.location.coordinateY}%2C${data.location.coordinateX}'">Located here</button>`;
     parent.appendChild(buttonsTd);
 }
 
@@ -39,8 +43,8 @@ $(document).ready(async function() {
             createElementFromAttribute(station.location.address, newStationTr);
             createElementFromAttribute(station.stationType.name, newStationTr);
             createElementFromAttribute(station.stationType.plugType, newStationTr);
-            if(station.isOpen)
-                createButtons(newStationTr, station);
+            createPushPin(station.name, station.location.coordinateY, station.location.coordinateX, station.location.address)
+            createButtons(newStationTr, station);
             table.append(newStationTr);
         }
     } else {
@@ -51,7 +55,7 @@ $(document).ready(async function() {
 async function addBooking(){    
     
     const data = {
-       startDateTime: $('#inputStartTime').val(),
+       startDate: $('#inputStartTime').val(),
        duration: $('#inputDuration').val(),
        licenceCar: $('#inputLicence').val(),
        stationId: $('#inputId').val()
@@ -101,8 +105,8 @@ async function search(){
             createElementFromAttribute(station.location.address, newStationTr);
             createElementFromAttribute(station.stationType.name, newStationTr);
             createElementFromAttribute(station.stationType.plugType, newStationTr);
-            if(station.isOpen)
-                createButtons(newStationTr, response);
+            createPushPin(station.name, station.location.coordinateY, station.location.coordinateX, station.location.address)
+            createButtons(newStationTr, station);
             table.append(newStationTr);
         }
     } else {
@@ -133,13 +137,34 @@ async function sortStations(attribute){
             createElementFromAttribute(station.location.address, newStationTr);
             createElementFromAttribute(station.stationType.name, newStationTr);
             createElementFromAttribute(station.stationType.plugType, newStationTr);
-            if(station.isOpen)
-                createButtons(newStationTr, station);
+            createPushPin(station.name, station.location.coordinateY, station.location.coordinateX, station.location.address)
+            createButtons(newStationTr, station);
             table.append(newStationTr);
         }
     } else {
         console.log("Errror ");
     }
+}
+
+
+function createPushPin(name, lat, long, content){
+    const pos = {lat: lat, lng: long};
+    const window = new google.maps.InfoWindow({
+        content: content
+    })
+    const marker = new google.maps.Marker({
+        position: pos,
+        map,
+        title: name,
+      });
+
+    marker.addListener("click", () => {
+        window.open({
+            anchor: marker,
+            map,
+            shouldFocus: false,
+        });
+    });
 }
 
 let map;

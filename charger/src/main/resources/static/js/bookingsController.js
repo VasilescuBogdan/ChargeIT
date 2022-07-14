@@ -143,7 +143,7 @@ async function updateBooking(){
         
         const response = responseJson.JSON;
         console.log(responseJson);
-       // window.location.reload();
+        window.location.reload();
         
 }
 

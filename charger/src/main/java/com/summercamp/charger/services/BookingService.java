@@ -32,8 +32,8 @@ public class BookingService {
 
         Booking booking = new Booking();
         booking.setStation(station);
-        booking.setStartDate(bookingDto.getStartDateTime());
-        booking.setEndDate(bookingDto.getStartDateTime().plusMinutes(bookingDto.getDuration()));
+        booking.setStartDate(bookingDto.getStartDate());
+        booking.setEndDate(bookingDto.getStartDate().plusMinutes(bookingDto.getDuration()));
         booking.setLicenceCar(bookingDto.getLicenceCar());
         
         if(bookingRepository.findByEndDateAfterAndStartDateBeforeAndStation(booking.getStartDate(), booking.getEndDate(), station).size() > 0){
@@ -56,8 +56,8 @@ public class BookingService {
             .orElseThrow(() -> new RuntimeException("Error while retrieving bookingDto type."));
         
         booking.setStation(station);
-        booking.setStartDate(bookingDto.getStartDateTime());
-        booking.setEndDate(bookingDto.getStartDateTime().plusMinutes(bookingDto.getDuration()));
+        booking.setStartDate(bookingDto.getStartDate());
+        booking.setEndDate(bookingDto.getStartDate().plusMinutes(bookingDto.getDuration()));
         booking.setLicenceCar(bookingDto.getLicenceCar());
 
         if(bookingRepository.findByEndDateAfterAndStartDateBeforeAndStation(booking.getStartDate(), booking.getEndDate(), station).size() > 0){
