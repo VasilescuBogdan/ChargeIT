@@ -78,7 +78,7 @@ public class StationService {
     } 
 
     
-    public Station getStationAfterName(String name){
+    public List<Station> getStationAfterName(String name){
         return stationRepository.findStationByNameContaining(name);
     }
 

@@ -18,11 +18,11 @@ public class Station {
     @Column(name = "Name", nullable = false, unique =  true)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "station_type_id", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "station_type_id")
     private StationType stationType;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id", nullable = false)
+    @OneToOne()
+    @JoinColumn(name = "location_id")
     private Location location;
 }

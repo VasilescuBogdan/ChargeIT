@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin("http://localhost:5500")
+@CrossOrigin()
 @RestController
 @RequestMapping("/api/bookings")
 public class BookingController {

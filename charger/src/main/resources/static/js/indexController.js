@@ -6,7 +6,7 @@ function createElementFromAttribute(attribute, parent) {
 
 function createButtons(parent, data) {
     const buttonsTd = document.createElement("td");
-    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog("${data.id}") data-bs-toggle="modal">Book now!</button>`;
+    buttonsTd.innerHTML = `<button type="button" class="btn btn-primary btn-big" onclick=showDialog("${data.id}")>Book now!</button>`;
     parent.appendChild(buttonsTd);
 }
 
@@ -37,10 +37,10 @@ $(document).ready(async function() {
             const newStationTr = document.createElement("tr");
             createElementFromAttribute(station.name, newStationTr);
             createElementFromAttribute(station.location.address, newStationTr);
-            createElementFromAttribute(station.isOpen, newStationTr);
             createElementFromAttribute(station.stationType.name, newStationTr);
             createElementFromAttribute(station.stationType.plugType, newStationTr);
-            createButtons(newStationTr, station);
+            if(station.isOpen)
+                createButtons(newStationTr, station);
             table.append(newStationTr);
         }
     } else {
@@ -49,24 +49,6 @@ $(document).ready(async function() {
 })
 
 async function addBooking(){    
-     
-    /*'use strict';
-      
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation');
-      
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-              event.preventDefault()
-              event.stopPropagation()
-            }
-      
-            form.classList.add('was-validated')
-        }, false)
-    });
-    */
     
     const data = {
        startDateTime: $('#inputStartTime').val(),
@@ -75,7 +57,7 @@ async function addBooking(){
        stationId: $('#inputId').val()
     };
 
-    const responseJson = fetch(
+    const responseJson = await fetch(
         baseURL + '/api/bookings',
         {
             method: 'POST',
@@ -86,9 +68,11 @@ async function addBooking(){
         });
     
     
-        if(!responseJson.ok)
-            alert("This station is not available in this time slot\n");
+    if(!responseJson.ok)
+        alert("This station is not available in this time slot\n");
             
+    const response = await responseJson.json();
+    console.log(response);
     window.location.reload();
         
 }
@@ -111,14 +95,16 @@ async function search(){
         console.log(response);
         const table = $("#stations-table tbody");
         table.empty();
-        const newStationTr = document.createElement("tr");
-        createElementFromAttribute(response.name, newStationTr);
-        createElementFromAttribute(response.location.address, newStationTr);
-        createElementFromAttribute(response.isOpen, newStationTr);
-        createElementFromAttribute(response.stationType.name, newStationTr);
-        createElementFromAttribute(response.stationType.plugType, newStationTr);
-        createButtons(newStationTr, response);
-        table.append(newStationTr);
+        for (const station of response) {
+            const newStationTr = document.createElement("tr");
+            createElementFromAttribute(station.name, newStationTr);
+            createElementFromAttribute(station.location.address, newStationTr);
+            createElementFromAttribute(station.stationType.name, newStationTr);
+            createElementFromAttribute(station.stationType.plugType, newStationTr);
+            if(station.isOpen)
+                createButtons(newStationTr, response);
+            table.append(newStationTr);
+        }
     } else {
         console.log("Errror ");
     }
@@ -145,10 +131,10 @@ async function sortStations(attribute){
             const newStationTr = document.createElement("tr");
             createElementFromAttribute(station.name, newStationTr);
             createElementFromAttribute(station.location.address, newStationTr);
-            createElementFromAttribute(station.isOpen, newStationTr);
             createElementFromAttribute(station.stationType.name, newStationTr);
             createElementFromAttribute(station.stationType.plugType, newStationTr);
-            createButtons(newStationTr, station);
+            if(station.isOpen)
+                createButtons(newStationTr, station);
             table.append(newStationTr);
         }
     } else {

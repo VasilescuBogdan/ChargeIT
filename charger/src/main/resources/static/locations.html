@@ -96,11 +96,11 @@
                                     <input type="text" class="form-control" id="inputCity" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputCoorX">CoordX</label>
+                                    <label for="inputCoorX">Longitudine</label>
                                     <input type="number" class="form-control" id="inputCoordX" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputCoordY">CoordY</label>
+                                    <label for="inputCoordY">Latitudine</label>
                                     <input type="number" class="form-control" id="inputCoordY" required>
                                 </div>
                             </form>
@@ -127,24 +127,28 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="inputAddress">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress" required>
+                                    <label for="inputUpdateAddress">Address</label>
+                                    <input type="text" class="form-control" id="inputUpdateAddress" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputCity">City</label>
-                                    <input type="text" class="form-control" id="inputCity" required>
+                                    <label for="inputUpdateCity">City</label>
+                                    <input type="text" class="form-control" id="inputUpdateCity" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputType">Coord X</label>
-                                    <input type="number" class="form-control" id="inputType" required>
+                                    <label for="inputUpdateLong">Longitudine</label>
+                                    <input type="number" class="form-control" id="inputUpdateLong" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputLocation">Coord Y</label>
-                                    <input type="number" class="form-control" id="inputLocation" required>
+                                    <label for="inputUpdateLat">Latitudine</label>
+                                    <input type="number" class="form-control" id="inputUpdateLat" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="inputUpdateId" required>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-big" onClick="updateLocation()">Update</button>
                         </div>
                     </div>
                 </div>

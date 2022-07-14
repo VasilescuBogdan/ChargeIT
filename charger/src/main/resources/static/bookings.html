@@ -90,6 +90,10 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
+                                    <input type="hidden" class="form-control" id="inputId" readonly>
+                                    <div class="invalid-feedback">Id invalid</div>
+                                </div>
+                                <div class="form-group">
                                     <label for="inputStartTime">Start date</label>
                                     <input type="datetime-local" class="form-control" id="inputStartTime" required>
                                     <div class="invalid-feedback">Alegeti o ora valida</div>
@@ -102,19 +106,20 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputLicence">Numarul masinii</label>
+                                    <label for="inputLicence">Car licence</label>
                                     <input type="text" class="form-control" id="inputLicence" placeholder="pune numarul de la masina" required>
                                     <div class="invalid-feedback">Format invalid</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputId">Id</label>
-                                    <input type="text" class="form-control" id="inputId" readonly>
-                                    <div class="invalid-feedback">Id invalid</div>
+                                    <label for="inputStationId">Station</label>
+                                    <select name="station selector" id="inputStationId">
+                                    </select>
                                 </div>
                             </form>
                         </div>
                             
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-big" onClick="updateBooking()">Update</button>
                         </div>
                     </div>
                 </div>

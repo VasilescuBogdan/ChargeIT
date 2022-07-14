@@ -38,6 +38,9 @@ $(document).ready(async function() {
     } else {
         console.log("Errror ");
     }
+
+    addOptionsStation()
+
 })
 
 async function deleteBooking(id){
@@ -53,7 +56,7 @@ async function deleteBooking(id){
 
     const response = responseJson.Json;
     console.log(responseJson);
-    //window.location.reload();
+    window.location.reload();
 }
 
 async function sortBooking(attribute){
@@ -87,4 +90,79 @@ async function sortBooking(attribute){
     }
 }
 
-//as
+async function updateBookingInit(id){
+
+    console.log(id);
+    const data = await fetchData(id);
+
+    const duration = Math.abs(data.endDate - data.startDate) / 60000;
+
+    $("#inputId").val(id);
+    $("#inputStartTime").val(data.startDate);
+    $("#inputDuration").val(duration);
+    $("#inputLicence").val(data.licenceCar);
+    $("#inputStationId").val(data.station.id);
+
+    const myModalEl = document.getElementById('updateForm');
+    const modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+    modal.show();
+}
+
+async function fetchData(id){
+        const responseJson = await fetch(
+            baseURL + `/api/bookings/` + id,
+        {
+            method: 'GET',
+            headers:{
+                'Content-Type':'application/json'
+            },
+        });
+    const response = await responseJson.json();
+    return response;
+}
+
+async function updateBooking(){
+    
+    const data = {
+        id: $('#inputId').val(),
+        startDate: $('#inputStartTime').val(),
+        duration: $('#inputDuration').val(),
+        licenceCar: $('#inputLicence').val(),
+        stationId: $('#inputStationId').val()
+    };
+
+    const responseJson = await fetch(
+        baseURL + `/api/bookings`,
+        {
+            method: 'PATCH',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const response = responseJson.JSON;
+        console.log(responseJson);
+       // window.location.reload();
+        
+}
+
+async function addOptionsStation(){
+    
+    const responseJson = await fetch(
+        baseURL + `/api/stations`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        for(const station of response){
+            $('#inputStationId').append(new Option(station.name, station.id));
+        }
+    }
+}

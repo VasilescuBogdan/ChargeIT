@@ -39,6 +39,9 @@ if (responseJson.ok) {
 } else {
     console.log("Errror ");
 }
+
+addOptionsType();
+addOptionsLocation();
 })
 
 async function addStation(){
@@ -166,6 +169,48 @@ async function updateStation(){
         console.log(responseJson);
         window.location.reload();
         
+}
+
+async function addOptionsType(){
+    
+    const responseJson = await fetch(
+        baseURL + `/api/stationTypes`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        for(const stationType of response){
+            $('#inputType').append(new Option(stationType.name, stationType.id));
+            $('#inputUpdateType').append(new Option(stationType.name, stationType.id));
+        }
+    }
+}
+
+async function addOptionsLocation(){
+    
+    const responseJson = await fetch(
+        baseURL + `/api/locations`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        for(const location of response){
+            $('#inputLocation').append(new Option(location.address, location.id));
+            $('#inputUpdateLocation').append(new Option(location.address, location.id));
+        }
+    }
 }
 
 

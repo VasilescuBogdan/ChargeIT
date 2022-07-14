@@ -84,6 +84,60 @@ async function deleteLocation(id){
     window.location.reload();
 }
 
+async function updateLocationInit(id){
+
+    console.log(id);
+    const data = await fetchData(id);
+
+    $("#inputUpdateId").val(id);
+    $("#inputUpdateAddress").val(data.address);
+    $("#inputUpdateCity").val(data.city);
+    $("#inputUpdateLong").val(data.coordinateX);
+    $("#inputUpdateLat").val(data.coordinateY);
+
+    const myModalEl = document.getElementById('updateForm');
+    const modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+    modal.show();
+}
+
+async function fetchData(id){
+        const responseJson = await fetch(
+            baseURL + `/api/locations/` + id,
+        {
+            method: 'GET',
+            headers:{
+                'Content-Type':'application/json'
+            },
+        });
+    const response = await responseJson.json();
+    return response;
+}
+
+async function updateLocation(){
+    
+    const data = {
+        id: $('#inputUpdateId').val(),
+        address: $('#inputUpdateAddress').val(),
+        city: $('#inputUpdateCity').val(),
+        coordinateX: $('#inputUpdateLong').val(),
+        coordinateY: $('#inputUpdateLat').val()
+    };
+
+    const responseJson = await fetch(
+        baseURL + `/api/locations`,
+        {
+            method: 'PATCH',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const response = responseJson.JSON;
+        console.log(responseJson);
+        window.location.reload();
+        
+}
 
 function createPushPin(name, lat, long, content){
     const pos = {lat: lat, lng: long};
