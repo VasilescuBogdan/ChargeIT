@@ -39,6 +39,9 @@ if (responseJson.ok) {
 } else {
     console.log("Errror ");
 }
+
+addOptionsType();
+addOptionsLocation();
 })
 
 async function addStation(){
@@ -46,7 +49,7 @@ async function addStation(){
     
     const data = {
         name: $('#inputName').val(),
-        isOpen: $('#inputIsOpen').val(),
+        isOpen: $('#inputIsOpen').is(":checked"),
         stationTypeId: $('#inputType').val(),
         locationId: $('#inputLocation').val()
     };    
@@ -64,6 +67,37 @@ async function addStation(){
         const response = responseJson.JSON;
         console.log(responseJson);
         window.location.reload();
+}
+
+async function sortStations(attribute){
+    
+    
+    const responseJson = await fetch(
+        baseURL + `/api/stations/sort/` + attribute,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        const table = $("#stations-table tbody");
+        table.empty();
+        for (const station of response) {
+            const newStationTr = document.createElement("tr");
+            createElementFromAttribute(station.name, newStationTr);
+            createElementFromAttribute(station.isOpen, newStationTr);
+            createElementFromAttribute(station.stationType.name, newStationTr);
+            createElementFromAttribute(station.location.address, newStationTr);
+            createButtons(newStationTr, station);
+            table.append(newStationTr);
+        }
+    } else {
+        console.log("Errror ");
+    }
 }
 
 async function deleteStation(id){
@@ -86,7 +120,8 @@ async function updateStationInit(id){
     
     console.log(id);
     const data = await fetchData(id);
-    
+
+    $("#inputUpdateId").val(id)
     $("#inputUpdateName").val(data.name);
     $("#inputUpdateIsOpen").val(data.isOpen); 
     $("#inputUpdateType").val(data.stationType.id);
@@ -115,7 +150,7 @@ async function updateStation(){
     const data = {
         id: $('#inputUpdateId').val(),
         name: $('#inputUpdateName').val(),
-        isOpen: $('#inputUpdateIsOpen').val(),
+        isOpen: $('#inputUpdateIsOpen').is(":checked"),
         stationTypeId: $('#inputUpdateType').val(),
         locationId: $('#inputUpdateLocation').val()
     };
@@ -133,6 +168,49 @@ async function updateStation(){
         const response = responseJson.JSON;
         console.log(responseJson);
         window.location.reload();
+        
+}
+
+async function addOptionsType(){
+    
+    const responseJson = await fetch(
+        baseURL + `/api/stationTypes`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        for(const stationType of response){
+            $('#inputType').append(new Option(stationType.name, stationType.id));
+            $('#inputUpdateType').append(new Option(stationType.name, stationType.id));
+        }
+    }
+}
+
+async function addOptionsLocation(){
+    
+    const responseJson = await fetch(
+        baseURL + `/api/locations`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        });
+
+    const response = await responseJson.json();
+    if (responseJson.ok) {
+        console.log(response);
+        for(const location of response){
+            $('#inputLocation').append(new Option(location.address, location.id));
+            $('#inputUpdateLocation').append(new Option(location.address, location.id));
+        }
+    }
 }
 
 

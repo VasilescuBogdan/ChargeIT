@@ -52,18 +52,26 @@
         <div class="content">
             
             <div class="addButton">
-                <button type="button" class="btn btn-primary btn-big" data-bs-toggle = "modal" data-bs-target="#addBackdrop" >Adauga</button>
+                <button type="button" class="btn btn-primary btn-big" data-bs-toggle = "modal" data-bs-target="#addForm" >Adauga</button>
             </div>
                         
             <!-- tabel -->
-            <div class="stations-table">
+            <div class="table-cont">
                 <table id ="stations-table" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">IsOpen</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Location</th>
+                            <th scope="col"> 
+                                <p type="button" onclick="sortStations('name')">Name</p>
+                            </th>
+                            <th scope="col">
+                                <p type="button" onclick="sortStations('isOpen')">IsOpen</p>
+                            </th>
+                            <th scope="col">
+                                <p type = "button" onclick="sortStations('stationType.name')">Type</p>
+                            </th>
+                            <th scope="col">
+                                <p type = "button" onclick="sortStations('location.address')">Location</p>
+                            </th>
                             <th scope="col">#</th>
                         </tr>
                     </thead>
@@ -73,7 +81,7 @@
             </div>
 
             <!--modal add-->
-            <div class="modal fade" id="addBackdrop" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="stationsLabel" aria-hidden="true">
+            <div class="modal fade" id="addForm" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="stationsLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -94,11 +102,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputType">Station type</label>
-                                    <input type="number" class="form-control" id="inputType" required>
+                                    <select name="Type selector" id="inputType">
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputLocation">Location</label>
-                                    <input type="number" class="form-control" id="inputLocation" required>
+                                    <select name="Location selector" id="inputLocation">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="inputId" required>
                                 </div>
                             </form>
                         </div>
@@ -134,20 +147,22 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <input class="form-check-input" type="checkbox" value="true" id="inputIsOpen">
+                                    <input class="form-check-input" type="checkbox" id="inputUpdateIsOpen">
                                     <label class="form-check-label" for="inputUpdateIsOpen">
                                         Este deschis?
                                     </label>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="inputType">Tipul de statie</label>
-                                    <input type="number" class="form-control" id="inputUpdateType" required>
+                                    <label for="inputUpdateType">Tipul de statie</label>
+                                    <select name="Type selector" id="inputUpdateType">
+                                    </select>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="inputLocation">Locatia</label>
-                                    <input type="number" class="form-control" id="inputUpdateLocation" required>
+                                    <label for="inputUpdateLocation">Locatia</label>
+                                    <select name="Location selector" id="inputUpdateLocation">
+                                    </select>
                                 </div>
                             </form>
                         </div>

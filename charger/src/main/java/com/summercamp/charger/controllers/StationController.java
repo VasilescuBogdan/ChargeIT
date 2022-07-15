@@ -37,14 +37,14 @@ public class StationController {
         stationService.deleteStation(Id);
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping()
     public void updateStation(@RequestBody StationDto station){
         stationService.updateStation(station);
     }
 
      
     @GetMapping(value = "/search/{name}")
-    public Station getStationAfterName(@PathVariable("name") String name){
+    public List<Station> getStationAfterName(@PathVariable("name") String name){
         return stationService.getStationAfterName(name);
     }
 

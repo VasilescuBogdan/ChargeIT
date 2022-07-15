@@ -89,20 +89,20 @@ async function fetchData(id){
         });
     const response = await responseJson.json();
     console.log(responseJson);
+    return response;
 }
 
 async function updateStationType(){
     
     const data = {
         id: $("#inputUpdateId").val(),
-        name: $('#inputName').val(),
-        isOpen: $('#inputIsOpen').val(),
-        stationTypeId: $('#inputType').val(),
-        locationId: $('#inputLocation').val()
+        name: $('#inputUpdateName').val(),
+        plugType: $('#inputUpdatePlugType').val(),
+        power: $('#inputUpdatePower').val(),
     };
 
     const responseJson = await fetch(
-        baseURL + `/api/stations`,
+        baseURL + `/api/stationTypes`,
         {
             method: 'PATCH',
             headers: {

@@ -67,11 +67,18 @@
                 <table id ="stations-table" class="table">
                     <thead>
                         <tr>
-                            <th type="button" onclick="sortStations('name')" scope="col">Name</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">IsOpen</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">PlugType</th>
+                            <th scope="col"> 
+                                <p type="button" onclick="sortStations('name')">Name</p>
+                            </th>
+                            <th scope="col">
+                                <p type="button" onclick="sortStations('location.address')">Address</p>
+                            </th>
+                            <th scope="col">
+                                <p type="button" onclick="sortStations('stationType.name')">Type</p>
+                            </th>
+                            <th scope="col">
+                                <p type="button" onclick="sortStations('stationType.plugType')">PlugType</p>
+                            </th>
                             <th scope="col">#</th>
                         </tr>
                     </thead>
@@ -82,12 +89,12 @@
             </div>
 
             <!--modal-->
-            <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="bookingLabel" aria-hidden="true">
+            <div class="modal fade" id="addForm" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="bookingLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                         <h5 class="modal-title" id="bookingsLabel">Booking</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         </div>
